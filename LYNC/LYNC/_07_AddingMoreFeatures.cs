@@ -47,14 +47,6 @@ namespace LYNC.V7
     public static class Extensions
     {
         // unchanged
-        public static T First<T>(this IEnumerable<T> originalList)
-        {
-            IEnumerator<T> enumerator = originalList.GetEnumerator();
-            enumerator.MoveNext();
-            return enumerator.Current;
-        }
-        
-        // unchanged
         public static IEnumerable<T> Filter<T>(this IEnumerable<T> originalList, Func<T, bool> check)
         {
             foreach (var item in originalList)
@@ -78,8 +70,6 @@ namespace LYNC.V7
             foreach (var item in originalList)
             {
                 Console.WriteLine("In Skip: " + count);
-                // With more intelligent use of GetEnumerator we could quickly loop through the skip count
-                // then just yield all the rest without the comparison and increment
                 if (count++ >= skipCount)
                 {
                     yield return item;
@@ -101,7 +91,7 @@ namespace LYNC.V7
                 }
                 else
                 {
-                    Console.WriteLine("Quick exit from Take");
+                    Console.WriteLine("Quick exit from Take with yield break");
                     yield break;
                 }
             }

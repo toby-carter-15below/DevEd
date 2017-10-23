@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -15,10 +16,21 @@ namespace LYNC
             Console.WriteLine();
         }
 
+        public static void ArrayList(ArrayList collection, string title)
+        {
+            Console.WriteLine("Displaying " + collection.GetType().ToString() + " for criteria " + title);
+            foreach (var obj in collection)
+                Console.WriteLine(obj);
+            Console.WriteLine();
+        }
+
+        //public static void List(Object[] collection, string title)
         public static void List(IEnumerable<Object> collection, string title)
         {
             Console.WriteLine("Displaying " + collection.GetType().ToString() + " for criteria " + title);
-            collection.ToList().ForEach(x => Console.WriteLine(x.ToString()));
+            //collection.ToList().ForEach(x => Console.WriteLine(x.ToString()));
+            foreach (var obj in collection)
+                Console.WriteLine(obj.ToString());
             Console.WriteLine();
         }
         // C# gets in a strop dealing with ints as objects :(
@@ -27,7 +39,9 @@ namespace LYNC
         public static void List(IEnumerable<int> collection, string title)
         {
             Console.WriteLine("Displaying " + collection.GetType().ToString() + " for criteria " + title);
-            collection.ToList().ForEach(x => Console.WriteLine(x.ToString()));
+            //collection.ToList().ForEach(x => Console.WriteLine(x.ToString()));
+            foreach (var obj in collection)
+                Console.WriteLine(obj.ToString());
             Console.WriteLine();
         }
 
@@ -35,7 +49,9 @@ namespace LYNC
         public static void AnyList<T>(IEnumerable<T> collection, string title)
         {
             Console.WriteLine("Generically displaying " + collection.GetType().ToString() + " for criteria " + title);
-            collection.ToList().ForEach(x => Console.WriteLine(x.ToString()));
+            //collection.ToList().ForEach(x => Console.WriteLine(x.ToString()));
+            foreach (var obj in collection)
+                Console.WriteLine(obj.ToString());
             Console.WriteLine();
         }
 
@@ -43,7 +59,7 @@ namespace LYNC
         {
             Console.WriteLine("Executing Query on " + collection.GetType().ToString());
             collection.ToList().GetEnumerator();
-            Console.WriteLine();
+            Console.WriteLine("TOBZHAXX - do i need to remove that ToList????");
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,9 +29,9 @@ namespace LYNC
             Display.List(filteredList, "Title contains third");
         }
 
-        public IEnumerable<Property> FilterProperties(IEnumerable<Property> originalList, IPropertyConditionChecker check)
+        public Property[] FilterProperties(IEnumerable<Property> originalList, IPropertyConditionChecker check)
         {
-            var filteredList = new List<Property>();
+            var filteredList = new ArrayList();
             foreach (var property in originalList)
             {
                 if (check.IsMatch(property))
@@ -38,7 +39,7 @@ namespace LYNC
                     filteredList.Add(property);
                 }
             }
-            return filteredList;
+            return (Property[]) filteredList.ToArray(typeof(Property));
         }
 
 
@@ -73,18 +74,18 @@ namespace LYNC
             }
         }
 
-        // Well, we now have a shiny new reusable method to inspect our collection, 
+        // Well, we now have a shiny new reusable method to inspect our collection,
         // but fuck me if's not labourious to tweak search parameters.
 
-        // This is an implementation of the Strategy design pattern... but it's a 
+        // This is an implementation of the Strategy design pattern... but it's a
         // bit too big and bulky for our little requirement here.
 
         // Creating an interface and then multiple implementations for such a trivial
         // task is going to polute our namespaces with a lot of crap, and in the case
-        // of the title checker we may have all sorts of subtle variations on how we 
+        // of the title checker we may have all sorts of subtle variations on how we
         // want to look for a condition: equals, contains, starts with, ends with...
 
-        // Each different search criteria takes a lot of constructing too, 
+        // Each different search criteria takes a lot of constructing too,
         // maybe more than doing it all by hand. We need to be able to send our
         // criteria in a more lightweight manner.
     }

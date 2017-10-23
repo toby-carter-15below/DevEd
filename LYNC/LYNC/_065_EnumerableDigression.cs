@@ -19,7 +19,8 @@ namespace LYNC.V65
             Console.WriteLine();
             Console.WriteLine("What happens behind the scenes:");
             // The compiler's foreach structure is syntactic sugar around this construct:
-            using (var enumerator = SampleData.AgentList.GetEnumerator())
+
+            using (var enumerator = (SampleData.AgentList as IEnumerable<Agent>).GetEnumerator())
             {
                 while (enumerator.MoveNext())
                 {
@@ -28,6 +29,15 @@ namespace LYNC.V65
                     Console.WriteLine(agent.ToString());
                 }
             }
+
+            // Note. Calling GetEnumerator on a plain array gets you something a bit
+            // different, hence the cast in the section above.
+            Console.WriteLine("\n(aside)");
+            var nonGeneric = SampleData.AgentList.GetEnumerator();
+            var generic = (SampleData.AgentList as IEnumerable<Agent>).GetEnumerator();
+            Console.WriteLine($"Non Generic = ${nonGeneric.GetType()}");
+            Console.WriteLine($"Generic = ${generic.GetType()}");
+            generic.Dispose();
         }
 
         [TestMethod]
@@ -60,9 +70,9 @@ namespace LYNC.V65
             public IEnumerator<int> GetEnumerator()
             {
                 EnumeratorThingy enumerator = new EnumeratorThingy(_internalDataStructure);
-                // copying the data structure byval means that a change to the data 
-                // like this won't break the iteration. 
-                _internalDataStructure = new int[] {1,2,3};
+                // copying the data structure by value means that a background change to the
+                // data like this won't break the iteration as it runs.
+                _internalDataStructure = new int[] { 1, 2, 3 };
                 return enumerator;
             }
 
@@ -83,10 +93,6 @@ namespace LYNC.V65
                 _values = values;
             }
 
-            public int Current
-            {
-                get { return _values[_index]; }
-            }
             // MoveNext needs to be called before any data can be read. This means
             // that it copes fine with collections containing no data
             public bool MoveNext()
@@ -94,6 +100,12 @@ namespace LYNC.V65
                 _index++;
                 return _index < _values.Length;
             }
+
+            public int Current
+            {
+                get { return _values[_index]; }
+            }
+
             ///////
             public void Dispose()
             {

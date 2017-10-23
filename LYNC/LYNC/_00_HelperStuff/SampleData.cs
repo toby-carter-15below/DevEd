@@ -6,12 +6,12 @@ namespace LYNC
 {
     public static class SampleData
     {
-        public static readonly List<Property> PropertyList = new List<Property>() {
+        public static readonly Property[] PropertyList = new [] {
                 new Property(){PropertyId = 1, AgentId = 1, Title = "first house is agent 1"},
                 new Property(){PropertyId = 2, AgentId = 1, Title = "second house is agent 1"},
                 new Property(){PropertyId = 3, AgentId = 2, Title = "third house is agent 2"}};
 
-        public static readonly List<Agent> AgentList = new List<Agent>() {
+        public static readonly Agent[] AgentList = new [] {
                 new Agent(){AgentId = 1, HeadOfficeId = null, Name = "first agent"},
                 new Agent(){AgentId = 2, HeadOfficeId = 1, Name = "second agent is a branch"},
                 new Agent(){AgentId = 3, HeadOfficeId = null, Name = "third agent stands alone"}};

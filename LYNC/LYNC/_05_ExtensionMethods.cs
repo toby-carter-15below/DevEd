@@ -36,6 +36,7 @@ namespace LYNC.V5
         // This method only looks at the parameters that it's given, and only affects variables that it
         // creates and returns, so wider system state neither affects or is effected by it. Essentially
         // calling this method is an implementation detail of other code.
+        // In Functional programming terms it is "pure" and we like that sorta stuff in F#
         public static IEnumerable<T> Filter<T>(this IEnumerable<T> originalList, Func<T, bool> check)
         {
             var filteredList = new List<T>();

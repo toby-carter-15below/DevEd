@@ -8,7 +8,7 @@ namespace LYNC
 {
     // A few simple data entity types
 
-    // Good OO would mean we should have references to objects rather than Ids for relationships, 
+    // Good OO would mean we should have references to objects rather than Ids for relationships,
     // but this sort of structure tends to be familiar.
 
     public class Property

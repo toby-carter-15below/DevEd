@@ -45,8 +45,8 @@ namespace LYNC
             Console.WriteLine(somethingToDisplay.Reverse().ToArray());
         }
 
-        // As mentioned, we can use the generic Action<T...> and Func<T...> for a lot of cases and cut down on 
-        // the number of declarations we make. But the signature becomes a little less clear, not just the 
+        // As mentioned, we can use the generic Action<T...> and Func<T...> for a lot of cases and cut down on
+        // the number of declarations we make. But the signature becomes a little less clear, not just the
         // proliference of generic types, but you can probably deduce what a DisplayMessage delegate is intended
         // for much more easily than an Action<string>
         // LINQ relies on generics, the Where method's delegate is typed from the collection it's processing, but
@@ -61,19 +61,20 @@ namespace LYNC
         [TestMethod]
         public void _3_SimpleDelegateCallFromMethod()
         {
-            ActionRunner(x=>Console.WriteLine(x));
+            Action<string> displayer = x => Console.WriteLine(x);
+            ActionRunner(displayer);
         }
 
 
 
-        // Delegates are key to events, and events are key to a bunch of stuff in the .Net framework. Here we have a 
+        // Delegates are key to events, and events are key to a bunch of stuff in the .Net framework. Here we have a
         // simple class that raises events to signify a percentage completion as that fits nicely into a test
-        // framework, but the most common events are click handlers and the like which ultimately boil down to the 
+        // framework, but the most common events are click handlers and the like which ultimately boil down to the
         // same sort of process.
         public class ImportantProcess
         {
             // this delegate type could be defined anywhere, not just in this class
-            public delegate void PercentageCompleteDelegate(int percentage); 
+            public delegate void PercentageCompleteDelegate(int percentage);
 
             public event PercentageCompleteDelegate PercentageComplete;
             //public event Action<int> PercentageComplete;
@@ -113,7 +114,7 @@ namespace LYNC
         }
 
 
-        // The "event" keyword gives us some syntactic sugar around the underlying delegate mechanism, 
+        // The "event" keyword gives us some syntactic sugar around the underlying delegate mechanism,
         // both for the subscriber code registering its handler, and the provider code doing the same.
         [TestMethod]
         public void _5_EventExampleWithWorkingsExposed()

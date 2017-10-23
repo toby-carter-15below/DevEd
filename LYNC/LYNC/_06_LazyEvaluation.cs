@@ -16,7 +16,7 @@ namespace LYNC.V6
             Display.List(filteredProperties, "AgentId==1");
             
             // But what if we just want to get the first item?
-            var firstMatch = SampleData.PropertyList.Filter(x => x.AgentId == 1).First();
+            var firstMatch = SampleData.PropertyList.Filter(x => x.AgentId == 1).JustTheFirst();
             Display.Item(firstMatch, "First item where AgentId==1");
 
             // Now for some lazy evaluation
@@ -26,11 +26,11 @@ namespace LYNC.V6
             Display.List(filteredProperties, "AgentId==1 (Lazy)");
 
             // But now, magic happens
-            firstMatch = SampleData.PropertyList.LazyFilter(x => x.AgentId == 1).First();
+            firstMatch = SampleData.PropertyList.LazyFilter(x => x.AgentId == 1).JustTheFirst();
             Display.Item(firstMatch, "First item where AgentId==1 (Lazy)");
 
 
-            firstMatch = SampleData.PropertyList.LazyFilterTidied(x => x.AgentId == 1).First();
+            firstMatch = SampleData.PropertyList.LazyFilterTidied(x => x.AgentId == 1).JustTheFirst();
             Display.Item(firstMatch, "First item where AgentId==1 (LazyTidied)");
         }
     }
@@ -59,7 +59,7 @@ namespace LYNC.V6
             return filteredList;
         }
 
-        public static T First<T>(this IEnumerable<T> originalList)
+        public static T JustTheFirst<T>(this IEnumerable<T> originalList)
         {
             IEnumerator<T> enumerator = originalList.GetEnumerator();
             enumerator.MoveNext(); // we're not being careful about null values here, nevermind.
@@ -129,5 +129,8 @@ namespace LYNC.V6
         // on large collections, as we don't have to create new intermediate collections, 
         // especially if chaining multiple steps together. And as we've seen with the First
         // method, it means that we can skip a lot of unneeded work in some cases.
+
+        // The flip side to that is that we have a bunch of work to do each time we iterate
+        // over our IEnumerable, hence the resharper warnings.
     }
 }

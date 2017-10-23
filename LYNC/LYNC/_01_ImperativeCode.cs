@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace LYNC
         [TestMethod]
         public void ImperativeSearchForPropertyId()
         {
-            var filteredList = new List<Property>();
+            var filteredList = new ArrayList();
             foreach (var property in SampleData.PropertyList)
             {
                 if (property.AgentId == 1)
@@ -23,13 +24,26 @@ namespace LYNC
                     filteredList.Add(property);
                 }
             }
-            Display.List(filteredList, "AgentId==1");
+            Display.ArrayList(filteredList, "AgentId==1");
+
+            // And to prod around at the history of .net even more...
+            filteredList.Add("Note that this ArrayList content is not even remotely typesafe");
+            filteredList.Add(null);
+            filteredList.Add("It was all we had prior to generics if we wanted easy adding");
+            filteredList.Add(23);
+            filteredList.Add("There were plain old arrays, which are safe, but don't resize");
+            filteredList.Add(DateTime.Now);
+            filteredList.Add("Or you could roll your own typed collection classes");
+            filteredList.Add("for every single entity class that you cared about");
+            filteredList.Add(new object());
+            // arrarys are great though!
+            Display.ArrayList(filteredList, "AgentId==1");
         }
 
         [TestMethod]
         public void ImperativeSearchForPropertyTitles()
         {
-            var filteredList = new List<Property>();
+            var filteredList = new ArrayList();// List<Property>();
             foreach (var property in SampleData.PropertyList)
             {
                 if (property.Title.Contains("third"))
@@ -37,7 +51,7 @@ namespace LYNC
                     filteredList.Add(property);
                 }
             }
-            Display.List(filteredList, "Title contains third");
+            Display.ArrayList(filteredList, "Title contains third");
         }
 
         // At this point it should be very obvious that we're duplicating most of the code to search 
