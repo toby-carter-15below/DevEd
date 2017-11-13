@@ -13,64 +13,64 @@ namespace LYNC
         // This is an implementation of the Strategy design pattern...
 
         [TestMethod]
-        public void SearchForPropertyUsingCommonCodeAndStrategyPatternToCompare()
+        public void SearchForEmployeeUsingCommonCodeAndStrategyPatternToCompare()
         {
             // We create an object instance that knows how to look for a condition that fits a simple interface definition
-            IPropertyConditionChecker agentIdPropertyChecker = new AgentIdPropertyChecker(1);
+            IEmployeeConditionChecker departmentIdEmployeeChecker = new DepartmentIdEmployeeChecker(3);
             // And use that in a call to a more generic (not in a generics sense) method
-            var filteredList = FilterProperties(SampleData.PropertyList, agentIdPropertyChecker);
+            var filteredList = FilterEmployees(SampleData.EmployeeList, departmentIdEmployeeChecker);
 
-            Display.List(filteredList, "AgentId==1");
+            Display.List(filteredList, "DepartmentId==3");
 
             // Then use a different checker for a different search
-            IPropertyConditionChecker titlePropertyChecker = new TitlePropertyChecker("third");
-            filteredList = FilterProperties(SampleData.PropertyList, titlePropertyChecker);
+            IEmployeeConditionChecker nameEmployeeChecker = new NameEmployeeChecker("Ed");
+            filteredList = FilterEmployees(SampleData.EmployeeList, nameEmployeeChecker);
 
-            Display.List(filteredList, "Title contains third");
+            Display.List(filteredList, "Name contains Ed");
         }
 
-        public Property[] FilterProperties(IEnumerable<Property> originalList, IPropertyConditionChecker check)
+        public Employee[] FilterEmployees(IEnumerable<Employee> originalList, IEmployeeConditionChecker check)
         {
             var filteredList = new ArrayList();
-            foreach (var property in originalList)
+            foreach (var employee in originalList)
             {
-                if (check.IsMatch(property))
+                if (check.IsMatch(employee))
                 {
-                    filteredList.Add(property);
+                    filteredList.Add(employee);
                 }
             }
-            return (Property[]) filteredList.ToArray(typeof(Property));
+            return (Employee[]) filteredList.ToArray(typeof(Employee));
         }
 
 
-        public interface IPropertyConditionChecker
+        public interface IEmployeeConditionChecker
         {
-            bool IsMatch(Property property);
+            bool IsMatch(Employee employee);
         }
 
-        public class AgentIdPropertyChecker : IPropertyConditionChecker
+        public class DepartmentIdEmployeeChecker : IEmployeeConditionChecker
         {
-            private readonly int _agentId;
-            public AgentIdPropertyChecker(int agentId)
+            private readonly int departmentId;
+            public DepartmentIdEmployeeChecker(int departmentId)
             {
-                _agentId = agentId;
+                this.departmentId = departmentId;
             }
-            public bool IsMatch(Property property)
+            public bool IsMatch(Employee employee)
             {
-                return property.AgentId == _agentId;
+                return employee.DepartmentId == departmentId;
             }
         }
 
-        public class TitlePropertyChecker : IPropertyConditionChecker
+        public class NameEmployeeChecker : IEmployeeConditionChecker
         {
-            private readonly string _titleSection;
-            public TitlePropertyChecker(string titleSection)
+            private readonly string nameSubSection;
+            public NameEmployeeChecker(string nameSubSection)
             {
-                _titleSection = titleSection;
+                this.nameSubSection = nameSubSection;
             }
-            public bool IsMatch(Property property)
+            public bool IsMatch(Employee employee)
             {
-                return property.Title.Contains(_titleSection);
+                return employee.Name.Contains(nameSubSection);
             }
         }
 

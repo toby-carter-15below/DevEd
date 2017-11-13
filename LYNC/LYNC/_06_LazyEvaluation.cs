@@ -12,29 +12,29 @@ namespace LYNC.V6
         public void LazyEvaluation()
         {
             // This loops through everything, that's fine and what we'd expect.
-            var filteredProperties = SampleData.PropertyList.Filter(x => x.AgentId == 1);
-            Display.List(filteredProperties, "AgentId==1");
-            
+            var filteredEmployees = SampleData.EmployeeList.Filter(x => x.DepartmentId == 1);
+            Display.List(filteredEmployees, "DepartmentId==1");
+
             // But what if we just want to get the first item?
-            var firstMatch = SampleData.PropertyList.Filter(x => x.AgentId == 1).JustTheFirst();
-            Display.Item(firstMatch, "First item where AgentId==1");
+            var firstMatch = SampleData.EmployeeList.Filter(x => x.DepartmentId == 1).JustTheFirst();
+            Display.Item(firstMatch, "First item where DepartmentId==1");
 
             // Now for some lazy evaluation
 
             // This still loops through everything, that's still fine and what we'd expect.
-            filteredProperties = SampleData.PropertyList.LazyFilter(x => x.AgentId == 1);
-            Display.List(filteredProperties, "AgentId==1 (Lazy)");
+            filteredEmployees = SampleData.EmployeeList.LazyFilter(x => x.DepartmentId == 1);
+            Display.List(filteredEmployees, "DepartmentId==1 (Lazy)");
 
             // But now, magic happens
-            firstMatch = SampleData.PropertyList.LazyFilter(x => x.AgentId == 1).JustTheFirst();
-            Display.Item(firstMatch, "First item where AgentId==1 (Lazy)");
+            firstMatch = SampleData.EmployeeList.LazyFilter(x => x.DepartmentId == 1).JustTheFirst();
+            Display.Item(firstMatch, "First item where DepartmentId==1 (Lazy)");
 
 
-            firstMatch = SampleData.PropertyList.LazyFilterTidied(x => x.AgentId == 1).JustTheFirst();
-            Display.Item(firstMatch, "First item where AgentId==1 (LazyTidied)");
+            firstMatch = SampleData.EmployeeList.LazyFilterTidied(x => x.DepartmentId == 1).JustTheFirst();
+            Display.Item(firstMatch, "First item where DepartmentId==1 (LazyTidied)");
         }
     }
-    
+
     public static class Extensions
     {
         // this is identical to before except for some tracing code to show how much it's used

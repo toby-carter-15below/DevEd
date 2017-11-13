@@ -11,16 +11,16 @@ namespace LYNC.V5
         [TestMethod]
         public void FluentSyntax()
         {
-            var filteredProperties = SampleData.PropertyList.Filter(x => x.AgentId == 1);
-            Display.List(filteredProperties, "AgentId==1");
+            var filteredEmployees = SampleData.EmployeeList.Filter(x => x.DepartmentId == 1);
+            Display.List(filteredEmployees, "Department==1");
 
-            filteredProperties = SampleData.PropertyList.Filter(x => !x.Title.Contains("first"));
-            Display.List(filteredProperties, "Title doesn't contain first");
+            filteredEmployees = SampleData.EmployeeList.Filter(x => !x.Name.Contains("Halen"));
+            Display.List(filteredEmployees, "Name doesn't contain Halen");
 
             // Obviously just chaining filters like this would be better served with both tests in a single criteria,
             // but it does the job for now, and saves having to think about other types of operation to code up, yet...
-            filteredProperties = SampleData.PropertyList.Filter(x => x.AgentId == 1).Filter(x => !x.Title.Contains("first"));
-            Display.List(filteredProperties, "AgentId==1, then Title doesn't contain first");
+            filteredEmployees = SampleData.EmployeeList.Filter(x => x.DepartmentId != 1).Filter(x => !x.Name.Contains("lex"));
+            Display.List(filteredEmployees, "Department!=1, then Name doesn't contain lex");
 
             // We can still call the method in the traditional manner as before too, but who wants to do that?
         }

@@ -14,17 +14,17 @@ namespace LYNC
         // based on some criteria.
 
         [TestMethod]
-        public void ImperativeSearchForPropertyId()
+        public void ImperativeSearchForEmployeeByDeparmentId()
         {
             var filteredList = new ArrayList();
-            foreach (var property in SampleData.PropertyList)
+            foreach (var employee in SampleData.EmployeeList)
             {
-                if (property.AgentId == 1)
+                if (employee.DepartmentId == 1)
                 {
-                    filteredList.Add(property);
+                    filteredList.Add(employee);
                 }
             }
-            Display.ArrayList(filteredList, "AgentId==1");
+            Display.ArrayList(filteredList, "DepartmentId==1");
 
             // And to prod around at the history of .net even more...
             filteredList.Add("Note that this ArrayList content is not even remotely typesafe");
@@ -37,21 +37,21 @@ namespace LYNC
             filteredList.Add("for every single entity class that you cared about");
             filteredList.Add(new object());
             // arrarys are great though!
-            Display.ArrayList(filteredList, "AgentId==1");
+            Display.ArrayList(filteredList, "And now with all sorts of extra gubbins.");
         }
 
         [TestMethod]
-        public void ImperativeSearchForPropertyTitles()
+        public void ImperativeSearchForEmployeeByName()
         {
-            var filteredList = new ArrayList();// List<Property>();
-            foreach (var property in SampleData.PropertyList)
+            var filteredList = new ArrayList();
+            foreach (var employee in SampleData.EmployeeList)
             {
-                if (property.Title.Contains("third"))
+                if (employee.Name.Contains("Van Halen"))
                 {
-                    filteredList.Add(property);
+                    filteredList.Add(employee);
                 }
             }
-            Display.ArrayList(filteredList, "Title contains third");
+            Display.ArrayList(filteredList, "Name contains Van Halen");
         }
 
         // At this point it should be very obvious that we're duplicating most of the code to search 

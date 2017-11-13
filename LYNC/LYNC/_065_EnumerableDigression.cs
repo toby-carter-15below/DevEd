@@ -11,30 +11,30 @@ namespace LYNC.V65
         public void _1_WhatIsForEach()
         {
             Console.WriteLine("Using foreach:");
-            foreach (Agent agent in SampleData.AgentList)
+            foreach (Department dept in SampleData.DepartmentList)
             {
-                Console.WriteLine(agent.ToString());
+                Console.WriteLine(dept.ToString());
             }
 
             Console.WriteLine();
             Console.WriteLine("What happens behind the scenes:");
             // The compiler's foreach structure is syntactic sugar around this construct:
 
-            using (var enumerator = (SampleData.AgentList as IEnumerable<Agent>).GetEnumerator())
+            using (var enumerator = (SampleData.DepartmentList as IEnumerable<Department>).GetEnumerator())
             {
                 while (enumerator.MoveNext())
                 {
-                    Agent agent = enumerator.Current;
+                    Department department = enumerator.Current;
                     // then we have our code from the loop body
-                    Console.WriteLine(agent.ToString());
+                    Console.WriteLine(department.ToString());
                 }
             }
 
             // Note. Calling GetEnumerator on a plain array gets you something a bit
             // different, hence the cast in the section above.
             Console.WriteLine("\n(aside)");
-            var nonGeneric = SampleData.AgentList.GetEnumerator();
-            var generic = (SampleData.AgentList as IEnumerable<Agent>).GetEnumerator();
+            var nonGeneric = SampleData.DepartmentList.GetEnumerator();
+            var generic = (SampleData.DepartmentList as IEnumerable<Department>).GetEnumerator();
             Console.WriteLine($"Non Generic = ${nonGeneric.GetType()}");
             Console.WriteLine($"Generic = ${generic.GetType()}");
             generic.Dispose();

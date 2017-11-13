@@ -14,7 +14,7 @@ namespace LYNC.V75
         [TestMethod]
         public void _075_GenericCollectionWin()
         {
-            var objects = SampleData.AgentList;
+            var objects = SampleData.DepartmentList;
             var numbers = SampleData.IntList;
             // IEnumerable<object> is fine here
             Display.List(objects, "Objects");

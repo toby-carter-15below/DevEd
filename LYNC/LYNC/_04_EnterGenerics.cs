@@ -11,23 +11,23 @@ namespace LYNC
         [TestMethod]
         public void GenericSearching()
         {
-            // FilterProperties just becomes Filter
-            var filteredProperties = Filter(SampleData.PropertyList, x => x.AgentId == 1);
-            Display.List(filteredProperties, "AgentId==1");
+            // FilterEmployees just becomes Filter
+            var filteredEmployees = Filter(SampleData.EmployeeList, x => x.DepartmentId == 1);
+            Display.List(filteredEmployees, "DepartmentId==1");
 
             // We can provide the generic type to the method, but we don't need to
-            filteredProperties = Filter<Property>(SampleData.PropertyList, x => x.Title.Contains("third"));
-            Display.List(filteredProperties, "Title contains third");
+            filteredEmployees = Filter<Employee>(SampleData.EmployeeList, x => x.Name.Contains("David"));
+            Display.List(filteredEmployees, "Name contains David");
 
             // And now we can use it on different types. Hurrah.
-            var filteredAgents = Filter(SampleData.AgentList, x => !x.Name.Contains("alone"));
-            Display.List(filteredAgents, "Name doesn't contain alone");
+            var filteredDepartments = Filter(SampleData.DepartmentList, x => !x.Name.Contains("front"));
+            Display.List(filteredDepartments, "Name doesn't contain front");
 
-            filteredAgents = Filter(SampleData.AgentList, x => x.HeadOfficeId == null);
-            Display.List(filteredAgents, "HeadOfficeId is null");
+            filteredDepartments = Filter(SampleData.DepartmentList, x => x.ParentId == null);
+            Display.List(filteredDepartments, "ParentId is null");
         }
 
-        // The code changes basically involve swapping out mentions of Property for the generic T
+        // The code changes basically involve swapping out mentions of Employee for the generic T
         // and making the delegate and method themselves generics
         public delegate bool ConditionChecker<T>(T item);
 
