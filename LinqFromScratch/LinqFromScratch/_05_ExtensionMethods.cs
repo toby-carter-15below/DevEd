@@ -29,7 +29,7 @@ namespace LinqFromScratch.V5
     // Extension methods need to sit in static classes
     public static class Extensions
     {
-        // They are static methods, and have that odd looking "this" keyword. 
+        // They are static methods, and have that odd looking "this" keyword.
         // Other than that, it's identical to our last function
 
         // We know that statics are evil when it comes to testing, but there are levels of evil at work.

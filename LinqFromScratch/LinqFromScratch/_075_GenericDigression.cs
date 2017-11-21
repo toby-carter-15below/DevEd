@@ -22,7 +22,7 @@ namespace LinqFromScratch.V75
             // This is co/contra variance on collections in action. You can cast int to
             // object, but not IE<int> to IE<object> due to int being a value type rather
             // than a reference type...
-            Console.WriteLine("TOBZHAXX - prolly spent a bit more time here...");
+            Console.WriteLine("TOBZHAXX - prolly spend a bit more time here...");
             Display.List(numbers, "Numbers");
 
 

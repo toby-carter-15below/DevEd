@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace LinqFromScratch
@@ -33,6 +32,7 @@ namespace LinqFromScratch
 
         public IEnumerable<T> Filter<T>(IEnumerable<T> originalList, ConditionChecker<T> check)
         //public IEnumerable<T> Filter<T>(IEnumerable<T> originalList, Func<T,bool> check)
+        //public IEnumerable<T> Filter<T>(IEnumerable<T> originalList, Predicate<T> check)
         {
             var filteredList = new List<T>();
             foreach (var item in originalList)

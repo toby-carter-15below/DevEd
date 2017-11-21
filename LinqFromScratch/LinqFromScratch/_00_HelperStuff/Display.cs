@@ -24,24 +24,22 @@ namespace LinqFromScratch
             Console.WriteLine();
         }
 
-        //public static void List(Object[] collection, string title)
         public static void List(IEnumerable<Object> collection, string title)
         {
             Console.WriteLine("Displaying " + collection.GetType().ToString() + " for criteria " + title);
-            //collection.ToList().ForEach(x => Console.WriteLine(x.ToString()));
-            foreach (var obj in collection)
-                Console.WriteLine(obj.ToString());
+            foreach (var item in collection)
+                Console.WriteLine(item.ToString());
             Console.WriteLine();
         }
+
         // C# gets in a strop dealing with ints as objects :(
         // Apart from the parameter type declaration this is absolutely identical to the one above
         // That has to be violating our DRY principles!
         public static void List(IEnumerable<int> collection, string title)
         {
             Console.WriteLine("Displaying " + collection.GetType().ToString() + " for criteria " + title);
-            //collection.ToList().ForEach(x => Console.WriteLine(x.ToString()));
-            foreach (var obj in collection)
-                Console.WriteLine(obj.ToString());
+            foreach (var item in collection)
+                Console.WriteLine(item.ToString());
             Console.WriteLine();
         }
 
@@ -49,7 +47,6 @@ namespace LinqFromScratch
         public static void AnyList<T>(IEnumerable<T> collection, string title)
         {
             Console.WriteLine("Generically displaying " + collection.GetType().ToString() + " for criteria " + title);
-            //collection.ToList().ForEach(x => Console.WriteLine(x.ToString()));
             foreach (var obj in collection)
                 Console.WriteLine(obj.ToString());
             Console.WriteLine();

@@ -20,7 +20,7 @@ namespace LinqFromScratch.V7
         {
             var lowNumbers = SampleData.IntList.Take(5);
             Display.List(lowNumbers, "Take 5");
-            
+
             lowNumbers = SampleData.IntList.Take(10);
             Display.List(lowNumbers, "Take 10");
         }
@@ -31,7 +31,7 @@ namespace LinqFromScratch.V7
             var someNumbers = SampleData.IntList.Filter(x => x > 1 && x < 10);
             Display.List(someNumbers, "Just filtered");
 
-            // The lazy execution means that we don't need to filter all of the numbers once we've 
+            // The lazy execution means that we don't need to filter all of the numbers once we've
             // skipped the first 2 and taken the next 3
             // This sort of stuff can be important for performance with larger data sets
             someNumbers = SampleData.IntList.Filter(x => x > 1 && x < 10).Skip(2).Take(3);
@@ -39,7 +39,7 @@ namespace LinqFromScratch.V7
 
             // Obviously, ordering Skips and Takes is important
             someNumbers = SampleData.IntList.Filter(x => x > 1 && x < 10).Take(3).Skip(2);
-            Display.List(someNumbers, "Filtered then paged");    
+            Display.List(someNumbers, "Filtered then paged");
         }
 
     }

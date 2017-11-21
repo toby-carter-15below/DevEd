@@ -1,10 +1,4 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace LinqFromScratch
+﻿namespace LinqFromScratch
 {
     // A few simple data entity types
 
@@ -31,7 +25,6 @@ namespace LinqFromScratch
 
         public override string ToString()
         {
-            //return "DepartmentId:" + DepartmentId + ", Name:" + Name;
             return "DepartmentId:" + DepartmentId + ", ParentId:" + (ParentId.HasValue ? ParentId.Value.ToString() : "<null>") + ", Name:" + Name;
         }
     }

@@ -42,12 +42,11 @@ namespace LinqFromScratch.V6
         {
             var filteredList = new List<T>();
             var counter = 0;
-            var matchedItem = false;
             Console.WriteLine("Running filter");
             foreach (var item in originalList)
             {
                 counter++;
-                matchedItem = false;
+                var matchedItem = false;
                 if (check(item))
                 {
                     filteredList.Add(item);
@@ -70,14 +69,13 @@ namespace LinqFromScratch.V6
         public static IEnumerable<T> LazyFilter<T>(this IEnumerable<T> originalList, Func<T, bool> check)
         {
             // lets ditch this line
-            // var filteredList = new List<T>(); 
+            // var filteredList = new List<T>();
             var counter = 0;
-            var matchedItem = false;
             Console.WriteLine("Running filter");
             foreach (var item in originalList)
             {
                 counter++;
-                matchedItem = false;
+                var matchedItem = false;
                 if (check(item))
                 {
                     // and this
@@ -85,7 +83,7 @@ namespace LinqFromScratch.V6
                     matchedItem = true;
                     // we'll tweak places where we output tracing a little
                     Console.WriteLine("filtered item " + counter + " and check was " + matchedItem);
-                    // and this breaks us out of the loop early, 
+                    // and this breaks us out of the loop early,
                     // but lets us get back in at the same point later on
                     yield return item;
                 }
@@ -97,7 +95,7 @@ namespace LinqFromScratch.V6
             yield break;
         }
 
-        // without all the tracing shit in the way, this is now very nice and neat, 
+        // without all the tracing shit in the way, this is now very nice and neat,
         // and not at all dissimilar to Linq's Where method.
         public static IEnumerable<T> LazyFilterTidied<T>(this IEnumerable<T> originalList, Func<T, bool> check)
         {
@@ -126,7 +124,7 @@ namespace LinqFromScratch.V6
         }
 
         // This sort of lazyness could potentially save us quite a bit of memory if working
-        // on large collections, as we don't have to create new intermediate collections, 
+        // on large collections, as we don't have to create new intermediate collections,
         // especially if chaining multiple steps together. And as we've seen with the First
         // method, it means that we can skip a lot of unneeded work in some cases.
 
