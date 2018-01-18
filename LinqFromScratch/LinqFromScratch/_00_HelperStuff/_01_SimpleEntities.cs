@@ -13,7 +13,9 @@
 
         public override string ToString()
         {
-            return "EmployeeId:" + EmployeeId + ", DeptId:" + DepartmentId + ", Name:" + Name;
+            return "EmployeeId:" + EmployeeId +
+                ", DeptId:" + DepartmentId +
+                ", Name:" + Name;
         }
     }
 
@@ -25,7 +27,9 @@
 
         public override string ToString()
         {
-            return "DepartmentId:" + DepartmentId + ", ParentId:" + (ParentId.HasValue ? ParentId.Value.ToString() : "<null>") + ", Name:" + Name;
+            return "DepartmentId:" + DepartmentId +
+                ", ParentId:" + (ParentId.HasValue ? ParentId.Value.ToString() : "<null>") +
+                ", Name:" + Name;
         }
     }
 }

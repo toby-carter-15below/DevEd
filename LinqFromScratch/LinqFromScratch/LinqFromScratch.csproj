@@ -45,17 +45,17 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="_00_HelperStuff\SampleData.cs" />
+    <Compile Include="_00_HelperStuff\_02_SampleData.cs" />
     <Compile Include="_035_DelegateDigression.cs" />
     <Compile Include="_065_EnumerableDigression.cs" />
     <Compile Include="_075_GenericDigression.cs" />
     <Compile Include="_08_ReturningDifferentTypes.cs" />
     <Compile Include="_07_AddingMoreFeatures.cs" />
-    <Compile Include="_00_HelperStuff\Display.cs" />
+    <Compile Include="_00_HelperStuff\_03_Display.cs" />
     <Compile Include="_03_UsingDelegatesForCriteria.cs" />
     <Compile Include="_01_ImperativeCode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="_00_HelperStuff\SimpleEntities.cs" />
+    <Compile Include="_00_HelperStuff\_01_SimpleEntities.cs" />
     <Compile Include="_02_SearchWithCommonCode.cs" />
     <Compile Include="_04_EnterGenerics.cs" />
     <Compile Include="_05_ExtensionMethods.cs" />

@@ -19,8 +19,8 @@ namespace LinqFromScratch.V65
             Console.WriteLine();
             Console.WriteLine("What happens behind the scenes:");
             // The compiler's foreach structure is syntactic sugar around this construct:
-
-            using (var enumerator = (SampleData.DepartmentList as IEnumerable<Department>).GetEnumerator())
+            using (var enumerator = (SampleData.DepartmentList as IEnumerable<Department>)
+                .GetEnumerator())
             {
                 while (enumerator.MoveNext())
                 {
@@ -30,19 +30,27 @@ namespace LinqFromScratch.V65
                 }
             }
 
-            // Note. Calling GetEnumerator on a plain array gets you something a bit
-            // different, hence the cast in the section above.
+            // Note. Calling GetEnumerator on a plain array gets you something a bit different,
+            // hence the cast in the section above.
             Console.WriteLine("\n(aside)");
             var nonGeneric = SampleData.DepartmentList.GetEnumerator();
-            var generic = (SampleData.DepartmentList as IEnumerable<Department>).GetEnumerator();
+            var generic = (SampleData.DepartmentList as IEnumerable<Department>)
+                .GetEnumerator();
             Console.WriteLine($"Non Generic = ${nonGeneric.GetType()}");
-            Console.WriteLine($"Generic = ${generic.GetType()}");
+            Console.WriteLine($"Generic     = ${generic.GetType()}");
             generic.Dispose();
+            // We can iterate over it just the same, but it's not disposable
+            while (nonGeneric.MoveNext())
+            {
+                var dept = nonGeneric.Current;
+                Console.WriteLine(dept);
+            }
         }
 
         [TestMethod]
         public void _2_AndWhatDoesThatEnumeratorDo()
         {
+            // Using a custom collection so we can implement its parts manually
             EnumerableThingy intCollection = new EnumerableThingy();
 
             Console.WriteLine("First run");
